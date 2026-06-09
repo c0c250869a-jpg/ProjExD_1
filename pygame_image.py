@@ -22,8 +22,20 @@ def main():
 
         key_lst = pg.key.get_pressed() #練習10-3
         #print(key_let)
-        if key_lst[pg.k_UP]:
-            kk_rct.move_ip(0, -1) 
+        mv_x = -1
+        mv_y = 0
+        if key_lst[pg.K_UP]:
+            mv_y -= 1   #上矢印キーが押されたら # 上に移動
+        if key_lst[pg.K_DOWN]:  #下矢印キーが押されたら  
+            mv_y += 1#下に移送
+        if key_lst[pg.K_LEFT]:
+            mv_x -= 1
+        if key_lst[pg.K_RIGHT]:
+            mv_x += 2
+        kk_rct.move_ip(mv_x, mv_y)
+        #演習1
+        if not key_lst[pg.K_UP] and not key_lst[pg.K_DOWN] and not key_lst[pg.K_LEFT] and not key_lst[pg.K_RIGHT]:
+            kk_rct.move_ip(-1,0)
 
         x = tmr%3200
         screen.blit(bg_img, [-x, 0])  # 練習5：背景画像を右から左へ
@@ -32,7 +44,7 @@ def main():
         screen.blit(kk_img, kk_rct)  # 練習4：こうかとんSurfaceの描画
         pg.display.update()
         tmr += 1        
-        clock.tick(400)
+        clock.tick(200)
 
 
 if __name__ == "__main__":
